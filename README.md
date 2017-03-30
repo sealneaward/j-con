@@ -69,8 +69,16 @@ git clone github.com/sealneaward/pi-con
 2. Start the client
 
 ```
-python client/client.py
+sudo python client/client.py
 ```
+
+3. Start the listener
+
+```
+sudo python listener.py
+```
+
+4. To end the application, either press `CTRL + C` or remove the sensorian sheild.
 
 ### Common Errors
 
