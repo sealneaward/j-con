@@ -1,12 +1,12 @@
-# pi-con
-Contextually aware access control on a Raspberry Pi.
+# j-con
+Contextually aware access control using context information stored in JSON documents.
 
 ## Introduction
 
 This application will serve as a context based access management system for communication across the RabbitMQ medium.
-The access managment is largely based on whether the sensors are supplying new information to client modues.
-If there has not been any updates locally, the client assumes the sensors are no longer connected,
-and the RabbitMQ communication access is shut off.
+The access managment is largely based on whether the devices requesting access follow the policy document created before hand.
+If the request device does not contain the correct context in regards to the defined places, people, and device identification,
+then no access is granted.
 
 ### RabbitMQ Server Setup
 
@@ -56,27 +56,57 @@ service rabbitmq-server status
 sudo rabbitmqctl list_queues
 ```
 
-### Raspberry Pi (Client) Setup
-
-**This assumes that you have Raspberry Pi setup, and the sensorian firmware is installed**
+### Client Setup
 
 1. Clone the repository
 
 ```
-git clone github.com/sealneaward/pi-con
+git clone github.com/sealneaward/j-con
 ```
 
 2. Start the client
 
 ```
-sudo python client/client.py
+python client/client.py
+
+usage: client.py [-h] [--device DEVICE] [--location LOCATION] [--user USER]
+                 [--policy POLICY]
+
+Make requests to write messages to channel based on attributes of listener in
+relation to channel.
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --device DEVICE      integer ID of listening device
+  --location LOCATION  location of listening device
+  --user USER          name of device user
+  --policy POLICY      path to policy to enforce
 ```
+
+Example: `python client.py --device 4 --location inside --user Steve --policy ./policy/policy_example.json`
+
 
 3. Start the listener
 
 ```
-sudo python listener.py
+
+python listener.py
+
+usage: listener.py [-h] [--device DEVICE] [--location LOCATION] [--user USER]
+                   [--policy POLICY]
+
+Make requests to listen to channel based on attributes of listener in relation
+to channel.
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --device DEVICE      integer ID of listening device
+  --location LOCATION  location of listening device
+  --user USER          name of device user
+  --policy POLICY      path to policy to enforce
 ```
+
+Example `python listener.py --device 1 --location inside --user Henry --policy ./policy/policy_example.json`
 
 4. To end the application, either press `CTRL + C` or remove the sensorian sheild.
 
