@@ -56,6 +56,24 @@ service rabbitmq-server status
 sudo rabbitmqctl list_queues
 ```
 
+### Raspberry Pi Emulator Setup
+
+1. Install the emulator
+
+```
+sudo add-apt-repository ppa:waveform/ppa
+sudo apt-get update
+sudo apt-get install python-sense-emu python3-sense-emu python-sense-emu-doc sense-emu-tools -y
+```
+
+2. Install the python library
+
+```
+pip install sense_emu
+```
+
+3. Open the application
+
 ### Client Setup
 
 1. Clone the repository
@@ -68,23 +86,7 @@ git clone github.com/sealneaward/j-con
 
 ```
 python client/client.py
-
-usage: client.py [-h] [--device DEVICE] [--location LOCATION] [--user USER]
-                 [--policy POLICY]
-
-Make requests to write messages to channel based on attributes of listener in
-relation to channel.
-
-optional arguments:
-  -h, --help           show this help message and exit
-  --device DEVICE      integer ID of listening device
-  --location LOCATION  location of listening device
-  --user USER          name of device user
-  --policy POLICY      path to policy to enforce
 ```
-
-Example: `python client.py --device 4 --location inside --user Steve --policy ./policy/policy_example.json`
-
 
 3. Start the listener
 
@@ -92,21 +94,22 @@ Example: `python client.py --device 4 --location inside --user Steve --policy ./
 
 python listener.py
 
-usage: listener.py [-h] [--device DEVICE] [--location LOCATION] [--user USER]
-                   [--policy POLICY]
+usage: listener.py [-h] [--device DEVICE] [--user USER] [--policy POLICY]
+                   [--data DATA] [--season SEASON]
 
 Make requests to listen to channel based on attributes of listener in relation
 to channel.
 
 optional arguments:
-  -h, --help           show this help message and exit
-  --device DEVICE      integer ID of listening device
-  --location LOCATION  location of listening device
-  --user USER          name of device user
-  --policy POLICY      path to policy to enforce
+  -h, --help       show this help message and exit
+  --device DEVICE  integer ID of listening device
+  --user USER      name of device user
+  --policy POLICY  path to policy to enforce
+  --data DATA      path to dataset containing context bounds
+  --season SEASON  season of the year
 ```
 
-Example `python listener.py --device 1 --location inside --user Henry --policy ./policy/policy_example.json`
+Example `python listener.py --device 1 --season winter --user Henry --policy ./policy/policy_example.json --data ./data/locations.csv`
 
 4. To end the application, either press `CTRL + C` or remove the sensorian sheild.
 

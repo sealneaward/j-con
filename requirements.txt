@@ -1,9 +1,12 @@
 appdirs==1.4.3
 numpy==1.12.1
+olefile==0.44
 packaging==16.8
 pandas==0.19.2
 pika==0.10.0
+Pillow==4.1.0
 pyparsing==2.2.0
 python-dateutil==2.6.0
 pytz==2017.2
+sense-emu==1.0
 six==1.10.0

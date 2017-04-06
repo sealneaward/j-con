@@ -1,12 +1,5 @@
 {
-  "listen": {
-    "devices": [1,2,3],
-    "locations" : ["inside"],
-    "users": ["Jill", "Henry", "Larry"]
-  },
-  "write": {
-    "devices": [4,5,6],
-    "locations" : ["inside"],
-    "users": ["Steve"]
-  }
+  "devices": [1,2,3],
+  "locations" : ["inside"],
+  "users": ["Jill", "Henry", "Larry"]
 }

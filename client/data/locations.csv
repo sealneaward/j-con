@@ -1,0 +1,5 @@
+season,location,temp_lower,temp_upper,humid_lower,humid_upper
+winter,inside,19,24,40,60
+winter,outside,-30,18.9,0,39.9
+summer,inside,0,2,40,60
+summer,outside,0,2,60.1,100
